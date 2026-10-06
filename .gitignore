@@ -1,5 +1,6 @@
 # folders
 EigenLib/
+.vscode
 
 # file types
 *.vtk
