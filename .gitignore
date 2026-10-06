@@ -1,1 +1,7 @@
+# folders
 EigenLib/
+
+# file types
+.vtk
+MESH/*.dat
+!MESH/SETS/*.dat
