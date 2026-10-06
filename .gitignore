@@ -2,6 +2,6 @@
 EigenLib/
 
 # file types
-.vtk
+*.vtk
 MESH/*.dat
 !MESH/SETS/*.dat
