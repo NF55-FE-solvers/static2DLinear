@@ -13,12 +13,7 @@
 #include "elStiffnessMatrix.h"
 #include "export.h"
 
-// to set number of threads for intel mkl pardiso sparse linear solver
-//extern "C" void mkl_set_num_threads(int nth);
-
 int main(){
-    //mkl_set_num_threads(DEFAULT_MKL_THREADS);
-    
     //Timer timer {};
     //timer.start();
     Mesh mesh {};
