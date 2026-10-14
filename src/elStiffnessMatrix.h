@@ -8,7 +8,7 @@
 
 namespace StiffMat{
     using KelEigen = Eigen::Matrix<Settings::precision,Settings::nDofEl
-        ,Settings::nDofEl,Eigen::RowMajor>;
+        ,Settings::nDofEl>;
     using NodesCoordEigen = Eigen::Matrix<Settings::precision
         ,Settings::nNodesEl,Settings::dofNode>;
     using dNEigen = Eigen::Matrix<Settings::precision,Settings::nNodesEl
