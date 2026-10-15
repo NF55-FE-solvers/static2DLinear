@@ -63,7 +63,7 @@ int main(){
                 Eigen::Matrix<int,Settings::dofNode,Settings::nNodesEl> 
                     dofEliMat;
                 int kElContiguousIndx {0};
-                const float numEl1perc {mesh.nElements/50.0f};
+                const float numEl1perc {mesh.nElements/20.0f};
                 float numEl2Message {numEl1perc};
                 for (SizT e=0uz; e<static_cast<SizT>(mesh.nElements); ++e){
                     nodesCoords = mesh.nodes(mesh.elements.row(e)
@@ -86,7 +86,7 @@ int main(){
                     if (e > numEl2Message){
                         std::cout << "Sparse Global Stiffness Matrix " 
                             << "computation... " << numEl2Message/numEl1perc
-                            *2.0f << "\%\n";
+                            *5.0f << "%\n";
                         numEl2Message += numEl1perc;
                     }
                 }
@@ -107,12 +107,8 @@ int main(){
             int nKnownDisp {mesh.nDof - nUnknownDisp};
             std::cout << "Solving the system of linear algebraic equations [K]"
                 << "{u}={F}...\n\n";
-            // Suggested for square positive definite system:
-            // For small problems (up to 200k dof) -> SimplicialLLT
-            // For medium problems (up to 1M dof)  -> PardisoLLT (linking)
-            // For large problems (over 1-2M dof)  -> ConjugateGradient
-            Eigen::PardisoLLT<Eigen::SparseMatrix<Settings::precision>> 
-                solver;
+            
+            Settings::solverType solver;
             solver.compute(kG.block(0,0,lastNanIndx+1,lastNanIndx+1));
             if(solver.info()!=Eigen::Success) {
                 throw "Linear solver failed decomposition(1).";

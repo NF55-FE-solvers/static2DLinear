@@ -2,15 +2,23 @@
 #define SETTINGS_H
 
 #include <limits>
-#include <Eigen/Core>
+#include <filesystem>
+#include "Eigen/Eigen"
+#include "Eigen/PardisoSupport"
 
 namespace Settings{
     using precision = double; // for computations (float or double), leave
     // double when using Intel MKL Pardiso solvers
+    using fPath = std::filesystem::path;
+    // Suggested for square positive definite system:
+    // For problems up to 1M dof -> PardisoLLT (direct)
+    // For large problems (over 1-2M dof) -> ConjugateGradient (iterative)
+    using solverType = Eigen::PardisoLLT<Eigen::SparseMatrix<precision>>;
     constexpr const bool exportBinaryVTK{true}; // binary is much faster
     constexpr const bool fullPrecisionASCIIWriting {false}; // suggested false
     constexpr const double memoryLimitMB {3000.0}; // avoiding dynamic 
     // allocation errors due to lack of heap memory availability
+    inline fPath expectedProjRoot {"static2DLinear"};
 
     // Useful constants:
     constexpr const double multiplierMemory4Solving {2.5}; // the multiplier of 
